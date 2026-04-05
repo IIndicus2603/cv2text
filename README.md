@@ -18,7 +18,7 @@ Chúng ta sử dụng Decorator để can thiệp vào hành vi của hàm một
 
 `@abstractmethod`: Đóng vai trò như một quy định bắt buộc. Khi bạn đặt nó ở lớp cha (`BaseExtractor`), bạn đang ra lệnh cho tất cả các lớp con (như `PdfExtractor`, `DocxExtractor`) là: "Bắt buộc phải có hàm extract thì mới được hoạt động!". Điều này giúp kiến trúc code luôn nhất quán.
 
-### **2. Áp dụng Pydantic BaseModel để chuẩn hóa dữ liệu** ###
+### **2. Áp dụng BaseModel để chuẩn hóa dữ liệu (Pydantic)** ###
    
 Để đảm bảo dữ liệu xuất ra luôn đồng nhất và không bị lỗi vặt, chương trình sử dụng `CVResult(BaseModel)` làm một chiếc "khuôn đúc" dữ liệu:
 
