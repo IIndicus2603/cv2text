@@ -24,7 +24,7 @@ Chúng ta sử dụng Decorator để can thiệp vào hành vi của hàm một
 
 Bắt buộc nhập đủ và đúng (Data Validation): Các trường như `file_name`, `file_path`, `extension`, và `status` được đánh dấu là bắt buộc (ký hiệu `...`). Nếu thiếu bất kỳ thông tin nào hoặc nhập sai kiểu dữ liệu (ví dụ: truyền số vào ô chữ), Pydantic sẽ chặn lại và báo lỗi ngay lập tức.
 
-### **3. Lập trình bất đồng bộ (Asynchronous Programming)** ###
+### **3. Lập trình bất đồng bộ (Asyncio)** ###
 
 Vì việc đọc file và ghi đĩa là các tác vụ I/O Bound (tiêu tốn thời gian chờ đợi phần cứng hơn là tính toán), chương trình sử dụng thư viện asyncio:
 
