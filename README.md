@@ -10,7 +10,7 @@
 
 ## 🚀 Các kỹ thuật đã dùng
 
-### **1. Decorators (Trình trang trí)** ###
+### **1. Decorators** ###
    
 Chúng ta sử dụng Decorator để can thiệp vào hành vi của hàm một cách linh hoạt:
 
