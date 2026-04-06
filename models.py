@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Optional
 from pydantic import BaseModel, Field
 
-
+        
 # Indicates whether text extraction succeeded or failed
 class CVStatus(str, Enum):
     SUCCESS = "success"
