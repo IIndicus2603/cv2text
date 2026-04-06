@@ -1,12 +1,11 @@
 import asyncio
 import glob
 import os
-import tempfile
 from abc import ABC, abstractmethod
 
 from docx import Document
 import pdfplumber
-from spire.doc import Document as SpireDocument, FileFormat as SpireFileFormat
+from spire.doc import Document as SpireDocument
 
 from models import CVResult, CVStatus
 
@@ -40,28 +39,22 @@ class DocxExtractor(BaseExtractor):
         return "\n".join(p.text for p in doc.paragraphs if p.text.strip()).strip()
 
 
-# Extract text from legacy .doc files by converting to PDF first, then using PdfExtractor
+# Extract text from legacy .doc files using Spire.Doc
 class DocExtractor(BaseExtractor):
+    WATERMARK = ("Evaluation Warning", "Spire.Doc for Python")
+
     def extract(self, file_path: str) -> str:
-        # Create a temporary PDF file to hold the converted output
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
-            tmp_path = tmp.name
-        try:
-            doc = SpireDocument()
-            doc.LoadFromFile(file_path)
-            doc.SaveToFile(tmp_path, SpireFileFormat.PDF)
-            doc.Close()
-            text = PdfExtractor().extract(tmp_path)
-            # Remove watermark lines added by the free Spire.Doc license
-            lines = [
-                line for line in text.splitlines()
-                if "Evaluation Warning" not in line and "Spire.Doc for Python" not in line
-            ]
-            return "\n".join(lines).strip()
-        finally:
-            # Always clean up the temp file
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
+        doc = SpireDocument()
+        doc.LoadFromFile(file_path)
+        text = doc.GetText()
+        doc.Close()
+
+        # Strip watermark lines injected by Spire.Doc
+        lines = [
+            line for line in text.splitlines()
+            if not any(phrase in line for phrase in self.WATERMARK)
+        ]
+        return "\n".join(lines).strip()
 
 
 # Maps file extensions to the correct extractor instance
