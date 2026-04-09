@@ -1,5 +1,5 @@
 # cv2text - Công cụ trích xuất nội dung CV
-Đây là một CLI được viết bằng Python, thiết kế để tự động hóa việc quét và trích xuất nội dung văn bản từ hàng loạt CV với các định dạng phổ biến: `.pdf`, `.docx`, `.doc`.
+Đây là một CLI được viết bằng Python, thiết kế để tự động hóa việc quét và trích xuất nội dung văn bản từ hàng loạt CV với các định dạng phổ biến: `.pdf`, `.docx`.
 
 ## 🛠 Cấu trúc hệ thống
 `main.py`: Chịu trách nhiệm cấu hình CLI (argparse), quản lý luồng thực thi chính và báo cáo kết quả.
@@ -16,7 +16,7 @@ Chúng ta sử dụng Decorator để can thiệp vào hành vi của hàm một
 
 `@timer`: Là một Custom Decorator dùng để đo thời gian thực thi của các tác vụ bất đồng bộ.
 
-`@abstractmethod`: Đóng vai trò như một quy định bắt buộc. Khi bạn đặt nó ở lớp cha (`BaseExtractor`), bạn đang ra lệnh cho tất cả các lớp con (như `PdfExtractor`, `DocxExtractor`, `DocExtractor`) là: "Bắt buộc phải có hàm extract thì mới được hoạt động!". Điều này giúp kiến trúc code luôn nhất quán.
+`@abstractmethod`: Đóng vai trò như một quy định bắt buộc. Khi bạn đặt nó ở lớp cha (`BaseExtractor`), bạn đang ra lệnh cho tất cả các lớp con (như `PdfExtractor`, `DocxExtractor`) là: "Bắt buộc phải có hàm extract thì mới được hoạt động!". Điều này giúp kiến trúc code luôn nhất quán.
 
 ### **2. Áp dụng BaseModel để chuẩn hóa dữ liệu (Pydantic)** ###
    
