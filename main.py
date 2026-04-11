@@ -13,23 +13,11 @@ from models import CVResult, CVStatus
 
 _NOISY_LIBS = ("pdfminer", "pdfplumber", "docx", "PIL", "fonttools")
 
-_RED   = "\033[31m"
-_RESET = "\033[0m"
-
-
-class _ColorFormatter(logging.Formatter):
-    # Change log color based on level: red for ERROR and above, default for others
-    def format(self, record: logging.LogRecord) -> str:
-        msg = super().format(record)
-        if record.levelno >= logging.ERROR:
-            return f"{_RED}{msg}{_RESET}"
-        return msg
-
 
 def _setup_logging(verbose: bool) -> None:
     level = logging.DEBUG if verbose else logging.INFO
     handler = logging.StreamHandler()
-    handler.setFormatter(_ColorFormatter(
+    handler.setFormatter(logging.Formatter(
         fmt="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
         datefmt="%H:%M:%S",
     ))
@@ -40,7 +28,7 @@ def _setup_logging(verbose: bool) -> None:
     for lib in _NOISY_LIBS:
         logging.getLogger(lib).setLevel(logging.WARNING)
 
-
+        
 # Decorator that measures and prints how long an async function takes to run
 def timer(func):
     @functools.wraps(func)
